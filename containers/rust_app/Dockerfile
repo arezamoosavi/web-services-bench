@@ -5,7 +5,7 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /opt/rust_app
-ADD ./rust_app ./opt/seaside
+ADD ./rust_app ./opt/rust_app
 
 WORKDIR /opt/rust_app
 RUN cargo build --release

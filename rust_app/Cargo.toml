@@ -1,5 +1,5 @@
 [package]
-name = "seaside"
+name = "rust_app"
 version = "0.1.0"
 authors = ["alireza <sdamoosavi@gmail.com>"]
 edition = "2018"

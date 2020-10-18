@@ -1,9 +1,47 @@
 version: "3"
 
 services:
-  rust_app:
-    build:
-      context: .
-      dockerfile: ./containers/rust_app/Dockerfile
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: ./containers/rust_app/Dockerfile
+  #   ports:
+  #     - 8000:8000
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: ./containers/flask_app/Dockerfile
+  #   ports:
+  #     - 8000:8000
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: ./containers/fastapi_app/Dockerfile
+  #   ports:
+  #     - 8000:8000
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: ./containers/django_app/Dockerfile
+  #   ports:
+  #     - 8000:8000
+
+  locust_master:
+    image: locustio/locust
     ports:
-      - 8000:8000
+      - "8089:8089"
+    expose:
+      - "8089"
+    volumes:
+      - ./locust:/mnt/locust
+    depends_on:
+      - app
+    command: -f /mnt/locust/locust_app.py --master -H http://app:8000
+
+  locust_worker:
+    image: locustio/locust
+    volumes:
+      - ./locust:/mnt/locust
+    depends_on:
+      - locust_master
+    command: -f /mnt/locust/locust_app.py --worker --master-host locust_master
