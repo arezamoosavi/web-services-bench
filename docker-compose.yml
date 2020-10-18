@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  rust_app:
+    build:
+      context: .
+      dockerfile: ./containers/rust_app/Dockerfile
+    ports:
+      - 8000:8000
