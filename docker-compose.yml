@@ -25,6 +25,18 @@ services:
   #     dockerfile: ./containers/django_app/Dockerfile
   #   ports:
   #     - 8000:8000
+  # app:
+  #   build:
+  #     context: .
+  #     dockerfile: ./containers/go_app/Dockerfile
+  #   ports:
+  #     - 8000:8000
+  app:
+    build:
+      context: .
+      dockerfile: ./containers/falcon_app/Dockerfile
+    ports:
+      - 8000:8000
 
   locust_master:
     image: locustio/locust
